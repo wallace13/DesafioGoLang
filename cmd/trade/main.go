@@ -42,21 +42,16 @@ func main() {
 		fmt.Printf("Nome: %s, Idade: %d, Pontuação: %d\n", pessoa.Nome, pessoa.Idade, pessoa.Pontuacao)
 	}
 
-	transformer.GerarArquivo("arquivo/OrdemNome.csv", pessoas)
+	transformer.GerarArquivo("arquivo/arquivo-destino.csv", pessoas)
 
 	// Ordena por Idade
 	queueIdade := entity.NewPessoaQueueIdade()
 	queueIdade.Pessoas = pessoas
 
 	fmt.Println("\nPessoas ordenadas por idade:")
-	var ordemIdadePessoa []entity.Pessoa
-
 	for queueIdade.Len() > 0 {
 		pessoa := queueIdade.Pop().(entity.Pessoa)
 		fmt.Printf("Idade: %d, Nome: %s, Pontuação: %d\n", pessoa.Idade, pessoa.Nome, pessoa.Pontuacao)
-		ordemIdadePessoa = append(ordemIdadePessoa, pessoa)
 	}
-
-	transformer.GerarArquivo("arquivo/OrdemIdade.csv", ordemIdadePessoa)
 
 }
